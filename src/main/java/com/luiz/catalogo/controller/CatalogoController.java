@@ -44,6 +44,14 @@ public class CatalogoController {
         return mv;
     }
 
+    @RequestMapping(value="/delete/{id}")
+    public String deleteMusica(@PathVariable("id") long id){
+        catalogoService.excluir(id);
+        
+        return "redirect:/musicas";
+        
+    }
+
     @RequestMapping(value="/addMusica", method=RequestMethod.GET)
     public String getMusicaForm(){       
         return "musicaForm";    
@@ -63,6 +71,27 @@ public class CatalogoController {
         return "redirect:/musicas";   
  
     }
+    
+    @RequestMapping(value="/edit/{id}", method=RequestMethod.GET)    
+    public ModelAndView geteditForm(@PathVariable("id") long id){
+        ModelAndView mv = new ModelAndView("editForm");
+        Musica musica = catalogoService.findById(id);
+        mv.addObject("musica", musica);
+        return mv;
+    }
 
+    @RequestMapping(value="/update/{id}", method=RequestMethod.POST)
+    public String editarMusica(@Valid Musica musica, BindingResult result, RedirectAttributes attributes){       
+        
+        if(result.hasErrors()){
+            attributes.addFlashAttribute("mensagem","Campos obrigatórios");
+            return "redirect:/edit/"+musica.getId();   
 
+        }
+        musica.setData(LocalDate.now());
+        catalogoService.save(musica);
+        
+        return "redirect:/musicas";   
+ 
+    }
 }
