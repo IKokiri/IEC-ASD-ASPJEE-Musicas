@@ -25,12 +25,7 @@
                     <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${musica.titulo}"></span> </h4></a>
                     <span th:utext="${musica.titulo}"> </span> </h4> </a>
                     <p class="card-text"> <span th:utext="${#strings.abbreviate(musica.letra,200)}"> </span>  </p>
-                    <a class="btn btn-danger" th:href="@{delete/__${musica.id}__}">
-                       Remover
-                    </a>
-                    <a class="btn btn-info" th:href="@{edit/__${musica.id}__}">
-                        Editar
-                     </a>
+                 
                 </div>
             </div>
         </div>

@@ -24,12 +24,20 @@
                         <br>
                         <i class="material-icons">date_range</i>
                         <span th:text="${musica.data}"></span>
+                        
                     </p>
                     <section>
                         <p class="card-text" style="margin-top: 40px;">
                         <span th:utext="${musica.letra}"></span></p>
                     </section>
             </article>
+            
+                    <a class="btn btn-danger" th:href="@{/delete/__${musica.id}__}">
+                        Remover
+                     </a>   
+                     <a class="btn btn-info" th:href="@{/edit/__${musica.id}__}">
+                        Editar
+                     </a>
         </div>
     </main>
 </body>
